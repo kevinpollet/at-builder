@@ -39,4 +39,16 @@ public interface AnnotationBuilder<T extends Annotation> {
 	 * @return The built annotation.
 	 */
 	T create();
+
+
+	interface AttributeBuilder<T extends Annotation> {
+		/**
+		 * Defines the value for the current configured attribute.
+		 *
+		 * @param value The current configured attribute value.
+		 *
+		 * @return The instance of {@code AnnotationBuilder}.
+		 */
+		AnnotationBuilder<T> value(Object value);
+	}
 }

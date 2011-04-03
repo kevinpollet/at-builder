@@ -22,13 +22,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.kevinpollet.atbuilder.api.AnnotationBuilder;
-import com.github.kevinpollet.atbuilder.api.AttributeBuilder;
 
 /**
  * @author Kevin Pollet
  */
 public class AnnotationBuilderImpl<T extends Annotation> implements AnnotationBuilder<T> {
-
 	private final Class<T> annotationClass;
 	private final Map<String, Object> attributes;
 
@@ -38,7 +36,7 @@ public class AnnotationBuilderImpl<T extends Annotation> implements AnnotationBu
 	}
 
 	public AttributeBuilder<T> setAttribute(String name) {
-		return new AttributeBuilderImpl<T>( name, this );
+		return this.new AttributeBuilderImpl<T>( name, this );
 	}
 
 	public T create() {
@@ -59,7 +57,18 @@ public class AnnotationBuilderImpl<T extends Annotation> implements AnnotationBu
 		);
 	}
 
-	protected void addAttribute(String name, Object value) {
-		attributes.put( name, value );
+	private class AttributeBuilderImpl<T extends Annotation> implements AnnotationBuilder.AttributeBuilder<T> {
+		private final String name;
+		private final AnnotationBuilder<T> annotationBuilder;
+
+		public AttributeBuilderImpl(String attribute, AnnotationBuilder<T> annotationBuilder) {
+			this.name = attribute;
+			this.annotationBuilder = annotationBuilder;
+		}
+
+		public AnnotationBuilder<T> value(Object value) {
+			attributes.put( name, value );
+			return annotationBuilder;
+		}
 	}
 }

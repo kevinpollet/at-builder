@@ -17,6 +17,7 @@ package com.github.kevinpollet.atbuilder.test;
 
 import com.github.kevinpollet.atbuilder.api.AnnotationBuilder;
 import com.github.kevinpollet.atbuilder.api.Builder;
+import com.github.kevinpollet.atbuilder.impl.AnnotationBuilderImpl;
 import com.github.kevinpollet.atbuilder.test.annotation.MyAnnotation;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
