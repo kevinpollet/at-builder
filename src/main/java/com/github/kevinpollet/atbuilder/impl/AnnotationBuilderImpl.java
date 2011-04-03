@@ -18,8 +18,8 @@ package com.github.kevinpollet.atbuilder.impl;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.github.kevinpollet.atbuilder.api.AnnotationBuilder;
 
@@ -32,7 +32,7 @@ public class AnnotationBuilderImpl<T extends Annotation> implements AnnotationBu
 
 	public AnnotationBuilderImpl(Class<T> annotationClass) {
 		this.annotationClass = annotationClass;
-		this.attributes = new HashMap<String, Object>();
+		this.attributes = new ConcurrentHashMap<String, Object>();
 	}
 
 	public AttributeBuilder<T> setAttribute(String name) {
