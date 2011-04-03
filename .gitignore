@@ -1,0 +1,9 @@
+#ignore MacOS files
+
+.DS_Store
+
+#ignores IntelliJ files
+
+*.iml
+*.ipr
+*.iws
