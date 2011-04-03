@@ -36,7 +36,7 @@ public class AnnotationBuilderImpl<T extends Annotation> implements AnnotationBu
 	}
 
 	public AttributeBuilder<T> setAttribute(String name) {
-		return this.new AttributeBuilderImpl<T>( name, this );
+		return new AttributeBuilderImpl<T>( name );
 	}
 
 	public T create() {
@@ -57,18 +57,16 @@ public class AnnotationBuilderImpl<T extends Annotation> implements AnnotationBu
 		);
 	}
 
-	private class AttributeBuilderImpl<T extends Annotation> implements AnnotationBuilder.AttributeBuilder<T> {
+	private class AttributeBuilderImpl<T extends Annotation> implements AttributeBuilder<T> {
 		private final String name;
-		private final AnnotationBuilder<T> annotationBuilder;
 
-		public AttributeBuilderImpl(String attribute, AnnotationBuilder<T> annotationBuilder) {
+		public AttributeBuilderImpl(String attribute) {
 			this.name = attribute;
-			this.annotationBuilder = annotationBuilder;
 		}
 
 		public AnnotationBuilder<T> value(Object value) {
 			attributes.put( name, value );
-			return annotationBuilder;
+			return (AnnotationBuilder<T>) AnnotationBuilderImpl.this;
 		}
 	}
 }
